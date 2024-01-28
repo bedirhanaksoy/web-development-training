@@ -102,6 +102,8 @@
             echo "<br>";
         ?>
 
+
+
         <h2>String Manipulation</h1>
 
         <form action="" method="post">
@@ -110,7 +112,7 @@
         </form>
 
         <?php
-
+            // string functions 
             function stringManipulation($input_str){
                 $reversed = strrev($input_str);
                 $len = strlen($input_str);
@@ -140,7 +142,7 @@
 
         <h2>Array Functions</h1>
         <?php
-
+            // array functions
             function is_input_int($input){
                 return is_int($input);
             }
@@ -172,7 +174,7 @@
 
 
         <h2>Area Calculation Functions</h1>
-
+        
         <form action="" method="post">
         Enter the height of the rectangle: <input type="text" name="height"><br>
         Enter the base lenght of the rectangle: <input type="text" name="base"><br>
@@ -180,7 +182,7 @@
         </form>
 
         <?php
-
+            // basic rectangle area calculator
             function rectangle($height, $base){
                 $area = ($base * $height)/2;
 
@@ -205,6 +207,7 @@
 
 
         <?php
+            // OOP features setter/getter functions and inheritance
             Class Book 
             {
                 
@@ -297,6 +300,7 @@
         </form>
 
         <?php
+            // exception handling with try catch mechanism
             if(isset($_POST["name_submit"])){
                 try 
                 {
