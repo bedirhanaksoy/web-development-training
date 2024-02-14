@@ -1,0 +1,30 @@
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+  
+    .score-display {
+        font-size: 20px;
+        color: black;
+    }  
+
+    .time-display {
+        font-size: 20px;
+        color: black;
+    }  
+
+    .highest-score-display {
+        font-size: 20px;
+        color: black;
+    }  
+
+    .circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: blue;
+        cursor: pointer;
+        position: absolute;
+        transition: 0.1s;
+    }
+  
