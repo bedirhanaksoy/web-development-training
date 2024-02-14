@@ -45,10 +45,8 @@ class function_bodies {
     }
 }
 
-// Create an instance of the class
 $body = new function_bodies();
 
-// Handle POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['setScoreQuery'])) {
