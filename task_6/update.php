@@ -30,14 +30,20 @@
         $data = json_decode($putData, true);
 
         if ($data !== null) {
-            $updator = new Update();
-            $result = $updator->updateUser($data['username'], $data['email'], $data['password'], $data['id']);
+            if (check_email($data['email']) && check_username($data['username'])) {
+                
+                // password hashing
+                $hashed_pw = (string)password_hash($data['password'], PASSWORD_BCRYPT);
 
-            if ($result) {
-                echo json_encode(array('status' => 'success'));
-            } else {
-                http_response_code(500);
-                echo json_encode(array('error' => 'Failed to update user'));
+                $updator = new Update();
+                $result = $updator->updateUser($data['username'], $data['email'], $hashed_pw, $data['id']);
+
+                if ($result) {
+                    echo json_encode(array('status' => 'success'));
+                } else {
+                    http_response_code(500);
+                    echo json_encode(array('error' => 'Failed to update user'));
+                }
             }
         } else {
             http_response_code(400);

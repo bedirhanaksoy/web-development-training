@@ -20,7 +20,7 @@ function getData() {
                                 Username: ${user.username}<br>
                                 Email: ${user.email}<br>
                                 Password: ${user.password}
-                            </p>
+                            </p><br>
                         `;
                     });
                 } else {
