@@ -28,9 +28,9 @@ class function_bodies {
         }
     }
 
-    public function setHighestScore($new_highest) {
+    public function setHighestScore($newScore) {
         try {
-            $sql = "UPDATE highest_score SET score = $new_highest WHERE id=1";
+            $sql = "UPDATE highest_score SET score = $newScore WHERE id=1";
             $result = $this->api->query($sql);
 
             if ($result) {

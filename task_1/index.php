@@ -13,7 +13,7 @@
         </form>
         
         <?php
-
+            
             $age = $_POST["customers_age"];
             $income = $_POST["customers_income"];
             $net_worth = $_POST["customers_net_worth"];
