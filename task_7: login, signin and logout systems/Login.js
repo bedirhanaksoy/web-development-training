@@ -160,7 +160,7 @@ function performLogin() {
 
         if (data.status === 'success') {
             loginSuccessAlert(data.session_username, data.id, data.session_email)
-            window.location.href = "home.html";
+            window.location.href = "main.php";
         } 
         else {
             loginFailedAlert();

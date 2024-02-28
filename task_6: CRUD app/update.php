@@ -45,7 +45,8 @@
                     echo json_encode(array('error' => 'Failed to update user'));
                 }
             }
-        } else {
+        } 
+        else {
             http_response_code(400);
         }
     }

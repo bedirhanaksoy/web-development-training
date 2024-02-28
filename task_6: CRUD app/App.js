@@ -23,10 +23,12 @@ function getData() {
                             </p><br>
                         `;
                     });
-                } else {
+                } 
+                else {
                     userList.innerHTML = "<p>No users found.</p>";
                 }
-            } else {
+            } 
+            else {
                 console.error('Failed to fetch users:', data.error);
             }
         })
