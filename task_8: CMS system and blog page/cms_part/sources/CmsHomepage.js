@@ -245,33 +245,22 @@ function categoryDeleteConfirmation(categoryName){
 // delete topic
 
 
-function validateDeleteTopic(){
-    var deleteTopicId = document.getElementById('delete_topic_id').value;
-    var deleteTopicName = document.getElementById('delete_topic_name').value;
+function validateDeleteTopic(id, title){
 
-    var topicIdRegex = /^[0-9]+$/;
-
-
-    if (!topicIdRegex.test(deleteTopicId)) {
-        alert('Topic ID must contain only numbers');
-        return false;
-    }
     
-    if(topicDeleteConfirmation(deleteTopicName)){
-        performDeleteTopic();
+    if(topicDeleteConfirmation(title)){
+        performDeleteTopic(id);
     }
     return false;
 
 }
 
-function performDeleteTopic(){
+function performDeleteTopic(id){
 
     const url = "../api/deleteTopic.php";
-
-    var deleteTopicId = document.getElementById('delete_topic_id').value;
     
     const data = {
-        TopicID: deleteTopicId
+        TopicID: id
     };
 
     const fetchOptions = {
@@ -1106,39 +1095,31 @@ function deleteCommentSuccessAlert(){
 }
 
 function selectImage() {
-
     document.getElementById('imageInput').click();
 }
 
-function handleImageSelection(event) {
-    var selectedImage = event.target.files[0];
+function handleImageSelection() {
 
-    if (selectedImage) {
-        const url = "../api/postImage.php";
+    var formData = new FormData();
+    var fileInput = document.getElementById('imageInput');
 
-        const formData = new FormData();
-        formData.append("image", selectedImage);
+    if (fileInput.files.length > 0) {
+        formData.append('image', fileInput.files[0]);
 
-        const fetchOptions = {
-            method: "POST",
-            body: formData
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../api/postImage.php', true);
+
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(xhr.responseText);
+            } else {
+                console.error('Error uploading image');
+            }
         };
 
-        fetch(url, fetchOptions)
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response data:', data);
-
-            if (data.status === 'success'){
-                updateImageSuccessAlert();
-            } 
-            else {
-                updateImageFailAlert();
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error.message);
-        });
+        xhr.send(formData);
+    } else {
+        console.error('Please select an image to upload');
     }
 }
 
@@ -1164,7 +1145,8 @@ function getProfilePicture(){
         console.log('Response data:', data);
 
         if (data.status === 'success'){
-            document.getElementById("longblobContent").innerHTML = data.image;
+            console.log(data.path);
+            document.getElementById("profile_picture").src = data.path;
         } 
         else {
             updateImageFailAlert();

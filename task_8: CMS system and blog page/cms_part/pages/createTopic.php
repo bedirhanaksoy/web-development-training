@@ -259,7 +259,7 @@
                         <label for="create_topic_title">New Topic Title:</label>
                         <input type="text" name="topic_title" id="create_topic_title" class="border rounded-md border-gray-300 p-2" ><br><br>
                         <label for="create_categoryname">New Topic Category ID:</label>
-                        <input type="text" name="topic_category_id" id="create_topic_category_id" class="border rounded-md border-gray-300 p-2" ><br><br>
+                        <input type="number" name="topic_category_id" id="create_topic_category_id" class="border rounded-md border-gray-300 p-2" ><br><br>
                         <label for="create_categoryname">New Topic Content:</label>
                         <input type="text" name="topic_content" id="create_topic_content" class="border rounded-md border-gray-300 p-2" ><br>
                         <button type="submit" value="submit" class="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-full">Submit</button>

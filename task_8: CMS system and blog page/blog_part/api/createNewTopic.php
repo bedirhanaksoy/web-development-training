@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../body/topicBody.php');
+require('topicBody.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['id']) ) {
     $postData = file_get_contents('php://input');
@@ -47,18 +47,17 @@ function check_if_user_exists($userID){
 }
 
 function check_topic_title($topicTitle){
-    if(preg_match('/^(?!\s+$)[\w\d\s\W]{1,40}$/', $topicTitle) === 1) { 
+    if(preg_match('/^(?!\s+$)[a-zA-Z0-9\s]{1,50}$/', $topicTitle)===1) { 
         return 1;
     }
     else return 0;
 }
 
 function check_topic_content($topicContent){
-    if(preg_match('/^(?!\s+$)[\w\d\s\W]{50,1000}$/', $topicContent) === 1) { 
+    if(preg_match('/^(?!\s+$)[a-zA-Z0-9\s]{50,1000}$/', $topicContent)===1) { 
         return 1;
-    } else {
-        return 0;
     }
+    else return 0;
 }
 
 function topicPublishTime(){

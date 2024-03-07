@@ -245,9 +245,16 @@
 
         }
 
+        .profile_image{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
   </style>
 </head>
 <body>
+
 
   <nav>
     <a id="my_blog">my_blog</a>
@@ -257,6 +264,11 @@
     <a href="#" id="commentsLink" onclick="showContent('comments')">Comments</a>
     <a href="#" onclick="performLogout()" class="logout">Logout</a>
   </nav>
+
+            <script>
+                getProfilePicture();
+            </script>
+
   
   <div class="flex-container content" id="categories">
         <div class="left">
@@ -317,6 +329,14 @@
 
     <div class="flex-container content" id="users">
         <div>
+            <img class="profile_image" id="profile_picture" name="profile_picture"></img>
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-blue-500 md:text-2xl text-center py-6">
+                Upload Profile Picture
+            </h1>
+            <form id="imageForm" method="POST" enctype="multipart/form-data">
+                <input type="file" id="imageInput" name ="image">
+                <button type="button" name ="submit" onclick="handleImageSelection()">Submit</button>
+            </form>
             <table class="container mx-auto mt-8 " id="user-table">
                 <script>
                     getUsersAndPageBar();
@@ -325,6 +345,7 @@
             <div id="user-page-bar" class=" page-box justify-center items-center">
 
             </div>
+            
         </div>
 
     </div>

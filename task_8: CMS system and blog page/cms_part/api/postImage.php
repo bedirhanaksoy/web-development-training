@@ -2,45 +2,30 @@
 session_start();
 require('../body/userBody.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['id'])) {
-    $imageData = file_get_contents($_FILES["image"]["tmp_name"]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
+    $file = $_FILES['image'];
+        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
 
-    if ($imageData !== false) {
-        if (check_if_user_exists($_SESSION['id']) && check_image_size($imageData)) {
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        
+        $uploadDir = '/var/www/html/cms_part/uploads/';
+        $uploadPath = $uploadDir . basename($file['name']);
 
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+            
             $pictureUploader = new userBody();
-            $result = $pictureUploader->setProfilePicture($_SESSION["id"], $imageData);
+            $result = $pictureUploader->setProfilePicture($_SESSION['id'], $uploadPath);
 
             if ($result) {
-                echo json_encode(array('status' => 'success'));
+                echo json_encode(['status' => 'success', 'message' => 'File uploaded successfully.']);
             } 
             else {
-                http_response_code(500);
-                echo json_encode(array('error' => 'Failed to upload image'));
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update profile picture.']);
             }
-        }
+        } 
         else {
-            http_response_code(403);
-            echo json_encode(array('error' => 'Invalid user id or too big picture'));
+            echo json_encode(['status' => 'error', 'message' => 'Failed to move uploaded file.']);
         }
     } 
-    else {
-        http_response_code(400);
-        echo json_encode(array('error' => 'Invalid data'));
-    }
-}
-
-function check_if_user_exists($user_id){
-    /*
-    
-    */
-    return 1;
-}    
-
-function check_image_size($image){
-    /*
-    
-    */
-    return 1;
 }
 ?>

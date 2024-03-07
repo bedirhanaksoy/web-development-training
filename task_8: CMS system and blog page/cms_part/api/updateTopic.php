@@ -54,14 +54,14 @@ function check_if_user_exists($userID){
 }
 
 function check_topic_title($topicTitle){
-    if(preg_match('/^(?!\s+$)[a-zA-Z0-9\s]{1,20}$/', $topicTitle)===1) { 
+    if(preg_match('/^(?!\s+$)[\w\d\s\W]{1,40}$/', $topicTitle) === 1) { 
         return 1;
     }
     else return 0;
 }
 
 function check_topic_content($topicContent){
-    if(preg_match('/^(?!\s+$)[a-zA-Z0-9\s]{50,1000}$/', $topicContent)===1) { 
+    if(preg_match('/^(?!\s+$)[\w\d\s\W]{20,1000}$/', $topicContent) === 1) { 
         return 1;
     }
     else return 0;

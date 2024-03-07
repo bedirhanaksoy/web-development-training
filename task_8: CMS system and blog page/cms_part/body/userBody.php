@@ -46,7 +46,7 @@ class userBody {
             return false; 
         }
 
-        $stmt->bind_param("bi", $image, $user_id);
+        $stmt->bind_param("si", $image, $user_id);
         $result = $stmt->execute();
         $stmt->close();
 
@@ -55,22 +55,24 @@ class userBody {
 
     public function getProfilePicture($user_id){
         $stmt = $this->api->prepare("SELECT profile_picture FROM users WHERE user_id=?");
-
+    
         if ($stmt === false) {
             return false; 
         }
-
+    
         $stmt->bind_param("i", $user_id);
-
+    
         $stmt->execute();
         $result = $stmt->get_result();
-        $stmt->close();
+    
         $row = $result->fetch_assoc();
-
-        return $result;
+        $profile_picture = $row['profile_picture'];
+    
+        $stmt->close();
+    
+        return $profile_picture;
     }
-
-    public function getPageNumber(){
+        public function getPageNumber(){
         $stmt = $this->api->prepare("SELECT COUNT(*) FROM users");
         
         $result = $stmt->execute();
